@@ -10,7 +10,7 @@ look_id = 123
 filter_field = 'products.brand_name'
 old_value = "Calvin Klein"
 new_value = "Allegra K"
-host = 'localhost'
+host = 'universityofcalgary'
 
 ### ------- OPEN THE CONFIG FILE and INSTANTIATE API -------
 

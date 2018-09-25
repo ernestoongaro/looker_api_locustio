@@ -14,7 +14,7 @@ f = open('config.yml')
 params = yaml.load(f)
 f.close()
 
-host = 'localhost'
+host = 'universityofcalgary'
 
 my_host = params['hosts'][host]['host']
 my_secret = params['hosts'][host]['secret']

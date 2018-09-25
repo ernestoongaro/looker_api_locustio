@@ -8,7 +8,7 @@ from argparse import ArgumentParser
 parser = ArgumentParser()
 parser.add_argument("-u", "--users", dest="users",help="comma separated list of users that need email credentials and saml credentials deleted")
 args = parser.parse_args()
-host = 'localhost'
+host = 'universityofcalgary'
 
 ### ------- OPEN THE CONFIG FILE and INSTANTIATE API -------
 

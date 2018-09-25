@@ -1,16 +1,11 @@
-import yaml ### install the pyyaml package
+import yaml
 from lookerapi import LookerApi
 from datetime import datetime
 from pprint import pprint
 
 
-### ------- HERE ARE PARAMETERS TO CONFIGURE -------
-
-look_to_get = 123
-host = 'localhost'
-
-
-### ------- OPEN THE CONFIG FILE and INSTANTIATE API -------
+look_to_get = 3
+host = 'universityofcalgary'
 
 f = open('config.yml')
 params = yaml.load(f)
@@ -25,12 +20,6 @@ looker = LookerApi(host=my_host,
                  secret = my_secret)
 
 
-### ------- GET AND PRINT THE LOOK -------
-
-data = looker.get_look()
+data = looker.get_look(look_to_get)
 
 pprint(data)
-
-### ------- Done -------
-
-print("Done")

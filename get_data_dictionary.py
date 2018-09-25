@@ -8,7 +8,7 @@ import requests
 
 ### ------- HERE ARE PARAMETERS TO CONFIGURE -------
 
-host = 'localhost'
+host = 'universityofcalgary'
 
 ### ------- OPEN THE CONFIG FILE and INSTANTIATE API -------
 

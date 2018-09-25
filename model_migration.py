@@ -12,7 +12,7 @@ parser.add_argument("-m", "--model",dest="model",help="name of model to migrate 
 
 args = parser.parse_args()
 
-host = 'localhost'
+host = 'universityofcalgary'
 
 ### ------- OPEN THE CONFIG FILE and INSTANTIATE API -------
 

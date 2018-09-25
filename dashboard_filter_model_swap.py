@@ -12,7 +12,7 @@ parser.add_argument("-s", "--source_model",dest="sourcemodel",help="name of sour
 parser.add_argument("-m", "--model",dest="destmodel",help="name of model to migrate dashboards to")
 
 args = parser.parse_args()
-host = 'localhost'
+host = 'universityofcalgary'
 
 ### ------- OPEN THE CONFIG FILE and INSTANTIATE API -------
 

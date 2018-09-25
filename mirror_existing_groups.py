@@ -10,7 +10,7 @@ parser = ArgumentParser()
 parser.add_argument("-g", "--groups", dest="groups",help="comma separated list of groups you want to create mirror groups for")
 
 args = parser.parse_args()
-host = 'localhost'
+host = 'universityofcalgary'
 
 ### ------- OPEN THE CONFIG FILE and INSTANTIATE API -------
 

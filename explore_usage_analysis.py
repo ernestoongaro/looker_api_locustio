@@ -7,7 +7,7 @@ import yaml
 
 ### ------- HERE ARE PARAMETERS TO CONFIGURE -------
 
-host = 'localhost'
+host = 'universityofcalgary'
 
 
 ### ------- OPEN THE CONFIG FILE and INSTANTIATE API -------
@@ -43,7 +43,7 @@ def write_fields(explore,value):
 
 ## --------- csv formatting -------------
 
-csvfile= open('explore_analysis.csv', 'wb')
+csvfile= open('explore_analysis.csv', 'w')
 
 w = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
 header = ['model',

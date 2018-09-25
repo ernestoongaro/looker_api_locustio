@@ -9,7 +9,7 @@ from pprint import pprint
 ### ------- HERE ARE PARAMETERS TO CONFIGURE -------
 
 looks_to_delete = sys.argv[1]
-host = 'localhost'
+host = 'universityofcalgary'
 
 
 ### ------- OPEN THE CONFIG FILE and INSTANTIATE API -------
