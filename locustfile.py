@@ -23,7 +23,7 @@ class ApiBehavior(TaskSet):
         url = '{}{}'.format(self.hostname, 'login')
         params = {'client_id': self.token,
                   'client_secret': self.secret}
-        with self.client.post(url, params=params, catch_response=True) as r:
+        with self.client.post(url, params=params, catch_response=True, verify=False) as r:
             access_token = r.json().get('access_token')
             print('Access token: ' + access_token)
 
