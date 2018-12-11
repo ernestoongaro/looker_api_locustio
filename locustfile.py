@@ -2,9 +2,6 @@ import yaml
 from locust import HttpLocust, TaskSet, task
 import random
 import requests
-from requests.packages.urllib3.exceptions import InsecureRequestWarning
-
-requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 class ApiBehavior(TaskSet):
 
@@ -26,10 +23,10 @@ class ApiBehavior(TaskSet):
         url = '{}{}'.format(self.hostname, 'login')
         params = {'client_id': self.token,
                   'client_secret': self.secret}
-        with self.client.post(url, params=params, catch_response=True, verify=False) as r:
+        with self.client.post(url,
+                              params=params,
+                              catch_response=True) as r: # add verify=False if using a self-signed cert
             access_token = r.json().get('access_token')
-            # print('Access token: ' + access_token)
-
         self.client.headers.update({'Authorization': 'token {}'.format(access_token)})
 
     def logout(self):
