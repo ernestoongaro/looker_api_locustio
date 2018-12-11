@@ -2,6 +2,9 @@ import yaml
 from locust import HttpLocust, TaskSet, task
 import random
 import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
 
 class ApiBehavior(TaskSet):
 
@@ -25,7 +28,7 @@ class ApiBehavior(TaskSet):
                   'client_secret': self.secret}
         with self.client.post(url, params=params, catch_response=True, verify=False) as r:
             access_token = r.json().get('access_token')
-            print('Access token: ' + access_token)
+            # print('Access token: ' + access_token)
 
         self.client.headers.update({'Authorization': 'token {}'.format(access_token)})
 
@@ -34,9 +37,8 @@ class ApiBehavior(TaskSet):
 
     @task(1)
     def get_look(self):
-
         # Choose a random look to retrieve results for:
-        max_look_id = 9  # This is the maximum look ID on my instance - update it as appropriate
+        max_look_id = 10  # This is the maximum look ID on my instance - update it as appropriate
         look_to_get = random.randint(1, max_look_id)
         url = '{}{}/{}/run/{}'.format(self.hostname, 'looks', look_to_get, 'json')
 
@@ -45,7 +47,7 @@ class ApiBehavior(TaskSet):
             if r.status_code == requests.codes.ok:
                 print(url + ': success (200)')
             else:
-                print(url + ': failure (' + r.status_code + ')')
+                print(url + ': failure (' + str(r.status_code) + ')')
 
 class ApiUser(HttpLocust):
     task_set = ApiBehavior
