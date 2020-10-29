@@ -1,19 +1,14 @@
 import yaml
-from locust import HttpLocust, TaskSet, task
+from locust import HttpUser, TaskSet, task, User
 import random
 import requests
 
 class ApiBehavior(TaskSet):
 
     def on_start(self):
-        global options
-        f = open('config.yml')
-        params = yaml.load(f)
-        f.close()
-        host_yaml_node = self.locust.host
-        self.hostname = params['hosts'][host_yaml_node]['host']
-        self.token = params['hosts'][host_yaml_node]['token']
-        self.secret = params['hosts'][host_yaml_node]['secret']
+        self.hostname = 'https://YOURS.cloud.looker.com/api/3.1/'
+        self.secret = 'YOURS'
+        self.token = 'YOURS'
         self.login()
 
     def on_stop(self):
@@ -30,23 +25,25 @@ class ApiBehavior(TaskSet):
         self.client.headers.update({'Authorization': 'token {}'.format(access_token)})
 
     def logout(self):
+        self.client.delete(self.hostname+'logout')
         return
 
     @task(1)
     def get_look(self):
         # Choose a random look to retrieve results for:
-        max_look_id = 10  # This is the maximum look ID on my instance - update it as appropriate
-        look_to_get = random.randint(1, max_look_id)
-        url = '{}{}/{}/run/{}'.format(self.hostname, 'looks', look_to_get, 'json')
+        look_ids = [5,6,7,8,9]  
+        look_to_get = random.choice(look_ids)
+        url = '{}{}/{}/run/{}'.format(self.hostname, 'looks', look_to_get, 'txt')
 
-        params = {'limit': 100000}
-        with self.client.get(url, params=params, stream=True) as r:
+        params = {'cache': 'false'}
+        #with self.client.get(url, params=params, stream=True) as r:
+        with self.client.get(url, params=params,timeout=60) as r:
             if r.status_code == requests.codes.ok:
                 print(url + ': success (200)')
             else:
-                print(url + ': failure (' + str(r.status_code) + ')')
+                print(url + ': failure (' + str(r.status_code) + str(r.reason) + ')')
 
-class ApiUser(HttpLocust):
-    task_set = ApiBehavior
-    min_wait = 5000
-    max_wait = 9000
+class ApiUser(HttpUser):
+    tasks = [ApiBehavior]
+    min_wait = 10000
+    max_wait = 60000
