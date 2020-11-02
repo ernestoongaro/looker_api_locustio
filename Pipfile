@@ -1,3 +1,7 @@
+[pipenv]
+allow_prereleases = true
+
+
 [[source]]
 url = "https://pypi.python.org/simple"
 verify_ssl = true
@@ -5,9 +9,10 @@ name = "pypi"
 
 [packages]
 locust = "*"
-pyyaml = "*"
+looker-sdk = "*"
+urllib3 = "==1.24.3"
 
 [dev-packages]
 
 [requires]
-python_version = "3.8"
+python_version = "3.8.5"
